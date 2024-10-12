@@ -6,4 +6,4 @@ build-encoder:
 
 run: build-rw build-encoder
 	./bin/encoder tests/testfile1 tests/secret
-	./bin/encoder tests/testfile2 tests/secret
+	./bin/encoder result.txt tests/secret
