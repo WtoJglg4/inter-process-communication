@@ -61,10 +61,12 @@ int main(int argc, char* argv[]) {
     // Send file's content
     string line;
     while (getline(file, line)) {
-        printf("Write line to socket ");
-        cout << line << endl;
         send(new_socket, line.c_str(), line.size(), 0);
-        send(new_socket, "\n", 1, 0);  // New line's sending
+        // Its important cause we want to distinguish 'dirty' and encoded messages.
+        // '\n' in encoded message breaks everything :D
+        // if (strcmp(filename, "result.txt") != 0){
+            send(new_socket, "\n", 1, 0);
+        // }
     }
 
     close(new_socket);
