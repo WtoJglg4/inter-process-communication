@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <vector>
 #include <fstream>
+#include "utils.cpp"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 #define BUFFER_SIZE 1024
 
 const char * reader_path = "./bin/reader";
+const char * result_path = "result.txt";
 
 void receiveData(int sock, vector<char>& buffer) {
     char tempBuffer[BUFFER_SIZE];
@@ -84,7 +86,7 @@ int main(int argc, char* argv[]) {
     waitpid(pid2, nullptr, 0);
 
      // XORing two buffers and write the result
-    ofstream result("result.txt");
+    ofstream result(result_path);
     size_t size1 = buffer1.size();
     size_t size2 = buffer2.size();
 
@@ -94,5 +96,6 @@ int main(int argc, char* argv[]) {
         result << xorResult;
     }
     result.close();
+    format(result_path);
     return EXIT_SUCCESS;
 }
